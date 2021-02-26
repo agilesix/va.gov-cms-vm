@@ -1,0 +1,12 @@
+- hosts: all
+  # Update system packages
+  pre_tasks:
+    - apt:
+        update_cache: yes
+      become: true
+      when: ansible_os_family == "Debian"
+  roles:
+    # Install docker
+    - role: geerlingguy.docker
+      become: true
+
