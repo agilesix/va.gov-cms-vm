@@ -1,0 +1,4 @@
+# Install Ubuntu 20 LTS
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+end
