@@ -9,4 +9,21 @@
     # Install docker
     - role: geerlingguy.docker
       become: true
+  tasks:
+    - name: Get latest version of lando
+      uri:
+        url: https://api.github.com/repos/lando/lando/releases/latest
+        return_content: true
+      register: lando_latest
+
+    - name: "get .deb package URL for {{ lando_latest.json.tag_name }}"
+      set_fact:
+        lando_deb_url: "{{ item.browser_download_url }}"
+      loop: "{{ lando_latest.json.assets }}"
+      when: item.name | regex_search("^lando-v.*\.deb$")
+
+    - name: Install lando .deb package
+      become: true
+      apt:
+        deb: "{{ lando_deb_url }}"
 
