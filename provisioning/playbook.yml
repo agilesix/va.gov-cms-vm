@@ -27,3 +27,9 @@
       apt:
         deb: "{{ lando_deb_url }}"
 
+    - name: Clone the va.gov CMS repo
+      ansible.builtin.git:
+        repo: https://github.com/department-of-veterans-affairs/va.gov-cms.git
+        dest: ~/va.gov-cms
+        accept_hostkey: yes
+
