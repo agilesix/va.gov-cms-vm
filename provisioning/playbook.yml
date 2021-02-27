@@ -9,6 +9,9 @@
     # Install docker
     - role: geerlingguy.docker
       become: true
+      docker_users:
+        - vagrant
+
   tasks:
     - name: Get latest version of lando
       uri:
