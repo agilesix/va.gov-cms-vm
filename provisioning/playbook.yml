@@ -36,6 +36,13 @@
         dest: ~/va.gov-cms
         accept_hostkey: yes
 
+    # See https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc for more information.
+    - name: Increase file change watch limit
+      become: true
+      sysctl:
+        name: fs.inotify.max_user_watches
+        value: '524288'
+
     - name: Start lando
       command: lando restart
       args:
