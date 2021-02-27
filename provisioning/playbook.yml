@@ -36,3 +36,11 @@
         dest: ~/va.gov-cms
         accept_hostkey: yes
 
+    - name: Start lando
+      command: lando restart
+      args:
+        chdir: ~/va.gov-cms
+      register: lando_output
+
+    - debug: var=lando_output
+
