@@ -1,10 +1,30 @@
 - hosts: all
+
   # Update system packages
   pre_tasks:
     - apt:
+        pkg:
+          - libasound2
+          - libatk-bridge2.0-0
+          - libgbm-dev
+          - libgconf-2-4
+          - libgtk2.0-0
+          - libgtk-3-0
+          - libnotify-dev
+          - libnss3
+          - libxss1
+          - libxtst6
+          - npm
+          - virtualbox-guest-dkms
+          - virtualbox-guest-utils
+          - virtualbox-guest-x11
+          - xauth
+          - xfce4
+          - xvfb
         update_cache: yes
       become: true
       when: ansible_os_family == "Debian"
+
   roles:
     # Install docker
     - role: geerlingguy.docker

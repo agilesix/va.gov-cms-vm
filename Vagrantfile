@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
     v.memory = vconfig['vagrant_memory']
     v.cpus = vconfig['vagrant_cpus']
+    v.gui = true
   end
 
   # Install Ubuntu 20 LTS.
