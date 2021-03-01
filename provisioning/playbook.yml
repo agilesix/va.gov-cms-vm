@@ -30,11 +30,31 @@
       apt:
         deb: "{{ lando_deb_url }}"
 
+    - name: Configure git name
+      git_config:
+        name: user.name
+        scope: global
+        value: "{{ gh_name }}"
+
+    - name: Configure git email address
+      git_config:
+        name: user.email
+        scope: global
+        value: "{{ gh_email }}"
+
     - name: Clone the va.gov CMS repo
       ansible.builtin.git:
         repo: https://github.com/{{ gh_username }}/va.gov-cms.git
+        version: master
         dest: ~/va.gov-cms
         accept_hostkey: yes
+        force: no
+      ignore_errors: yes
+      register: clone_command_res
+
+    - name: Only allow the expected failure
+      assert:
+        that: "not clone_command_res['failed'] or 'already exists and is not an empty directory' in clone_command_res['msg'].lower()"
 
     # See https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc for more information.
     - name: Increase file change watch limit

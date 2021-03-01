@@ -1,5 +1,9 @@
 # Your github username.
 gh_username: ''
+# Your full name (for use with github).
+gh_name: ''
+# Your github email address.
+gh_email: ''
 # The name of the SSH key you use with github.
 gh_keyname: 'id_rsa'
 
