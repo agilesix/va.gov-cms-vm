@@ -54,7 +54,7 @@
 
     - name: Only allow the expected failure
       assert:
-        that: "not clone_command_res['failed'] or 'already exists and is not an empty directory' in clone_command_res['msg'].lower()"
+        that: "not clone_command_res['failed'] or 'already exists and is not an empty directory' in clone_command_res['msg'].lower() or 'local modifications exist in repository' in clone_command_res['msg'].lower()"
 
     - name: Add git upstream remote
       command: git remote add upstream git@github.com:department-of-veterans-affairs/va.gov-cms.git
