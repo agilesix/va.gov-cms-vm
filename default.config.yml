@@ -1,0 +1,10 @@
+# Your github username.
+gh_username: ''
+# The name of the SSH key you use with github.
+gh_keyname: 'id_rsa'
+
+# Amount of RAM for the VM.
+vagrant_memory = "8096"
+# Number of CPUs for the VM.
+vagrant_cpus = "3"
+

@@ -32,7 +32,7 @@
 
     - name: Clone the va.gov CMS repo
       ansible.builtin.git:
-        repo: https://github.com/department-of-veterans-affairs/va.gov-cms.git
+        repo: https://github.com/{{ gh_username }}/va.gov-cms.git
         dest: ~/va.gov-cms
         accept_hostkey: yes
 
@@ -43,11 +43,8 @@
         name: fs.inotify.max_user_watches
         value: '524288'
 
-    - name: Start lando
-      command: lando restart
-      args:
-        chdir: ~/va.gov-cms
-      register: lando_output
-
-    - debug: var=lando_output
+    - name: Start docker
+      command: systemctl start docker
+      become: true
+      register: docker_output
 
