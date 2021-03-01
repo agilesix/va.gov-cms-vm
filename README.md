@@ -11,7 +11,7 @@ Provide a low-effort method for getting up and running with a CMS development en
 
 ## Viewing the web/mailhog environments
 
-## Visual Studio Code
+### Visual Studio Code
 
 Open a terminal and run `lando info`. Then, command-click on a URL to open it. (VS Code will automatically forward the port)
 
