@@ -56,6 +56,12 @@
       assert:
         that: "not clone_command_res['failed'] or 'already exists and is not an empty directory' in clone_command_res['msg'].lower()"
 
+    - name: Add git upstream remote
+      command: git remote add upstream git@github.com:department-of-veterans-affairs/va.gov-cms.git
+      ignore_errors: yes
+      args:
+        chdir: ~vagrant/va.gov-cms
+
     # See https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc for more information.
     - name: Increase file change watch limit
       become: true
