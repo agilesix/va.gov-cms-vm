@@ -52,6 +52,10 @@
     - name: Register Drupal coding standard
       command: phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 
+    - name: Add composer bin to path
+      become: true
+      lineinfile: dest=/etc/bash.bashrc line='export PATH=$PATH:~/.composer/vendor/bin' create=yes
+
     - name: Get latest version of lando
       uri:
         url: https://api.github.com/repos/lando/lando/releases/latest
