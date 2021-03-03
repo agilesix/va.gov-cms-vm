@@ -64,9 +64,10 @@ Vagrant.configure("2") do |config|
   # Install application.
   config.vm.provision "ansible_local" do |ansible|
     ansible.extra_vars = {
-      gh_username: vconfig['gh_username'],
+      app_dir: vconfig['app_dir'],
+      gh_email: vconfig['gh_email'],
       gh_name: vconfig['gh_name'],
-      gh_email: vconfig['gh_email']
+      gh_username: vconfig['gh_username']
     }
     ansible.playbook = "provisioning/playbook.yml"
     ansible.galaxy_role_file = "provisioning/requirements.yml"

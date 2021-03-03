@@ -87,15 +87,15 @@
 
     - name: Clone the va.gov CMS repo
       ansible.builtin.git:
-        repo: https://github.com/{{ gh_username }}/va.gov-cms.git
+        repo: "https://github.com/{{ gh_username }}/va.gov-cms.git"
         version: master
-        dest: ~/va.gov-cms
+        dest: "{{ app_dir }}"
         accept_hostkey: yes
         force: no
       ignore_errors: yes
       register: clone_command_res
 
-    - name: Only allow the expected failure
+    - name: Ignore cloning errors on re-provision
       assert:
         that: "not clone_command_res['failed'] or 'already exists and is not an empty directory' in clone_command_res['msg'].lower() or 'local modifications exist in repository' in clone_command_res['msg'].lower()"
 
@@ -103,7 +103,7 @@
       command: git remote add upstream git@github.com:department-of-veterans-affairs/va.gov-cms.git
       ignore_errors: yes
       args:
-        chdir: ~vagrant/va.gov-cms
+        chdir: "{{ app_dir }}"
 
     # See https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc for more information.
     - name: Increase file change watch limit

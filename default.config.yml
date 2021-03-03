@@ -8,7 +8,10 @@ gh_email: ''
 gh_keyname: 'id_rsa'
 
 # Amount of RAM for the VM.
-vagrant_memory: "8096"
+vagrant_memory: 8096
 # Number of CPUs for the VM.
-vagrant_cpus: "3"
+vagrant_cpus: 3
+
+# Application directory
+app_dir: "~vagrant/va.gov-cms"
 
