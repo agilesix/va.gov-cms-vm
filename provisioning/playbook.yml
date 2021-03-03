@@ -2,7 +2,8 @@
 
   # Update system packages
   pre_tasks:
-    - apt:
+    - name: Install guest additions & cypress dependencies
+      apt:
         pkg:
           - libasound2
           - libatk-bridge2.0-0
@@ -37,25 +38,8 @@
       php_packages: ['php-cli', 'php-mbstring', 'php-xml']
       php_enable_webserver: false
       php_default_version_debian: "7.2"
-    # Install composer
-    - role: geerlingguy.composer
-      become: true
-      composer_home_path: '~/.composer'
-      composer_home_owner: vagrant
-      composer_home_group: vagrant
-      composer_global_packages: [{ name: 'drupal/coder', release: '8.3.*' }]
-      composer_add_to_path: true
-      composer_version_branch: ''
-      composer_version: '1.10.12'
 
   tasks:
-    - name: Register Drupal coding standard
-      command: phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
-
-    - name: Add composer bin to path
-      become: true
-      lineinfile: dest=/etc/bash.bashrc line='export PATH=$PATH:~/.composer/vendor/bin' create=yes
-
     - name: Get latest version of lando
       uri:
         url: https://api.github.com/repos/lando/lando/releases/latest

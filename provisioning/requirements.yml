@@ -1,7 +1,6 @@
 ---
 roles:
   # Install roles from Ansible Galaxy.
-  - name: geerlingguy.composer
   - name: geerlingguy.docker
   - name: geerlingguy.php
 
