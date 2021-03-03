@@ -89,6 +89,11 @@
       args:
         chdir: "{{ app_dir }}"
 
+    - name: Add port forwarding setup for lando.
+      ansible.builtin.template:
+        src: /vagrant/templates/.lando.local.yml.j2
+        dest: "{{ app_dir }}/.lando.local.yml"
+
     # See https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc for more information.
     - name: Increase file change watch limit
       become: true

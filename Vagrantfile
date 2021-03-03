@@ -19,6 +19,10 @@ Welcome to the VA.gov CMS VM!
 
 Please connect using your IDE's ssh plugin and the
 hostname: va.gov-cms-vm
+
+VA CMS Url: http://localhost:20080/
+VA CMS Url: https://localhost:20443/
+Mailhog Url: https://localhost:20081/
 --------------------------------------------------------
 MSG
 
@@ -32,6 +36,14 @@ Vagrant.configure("2") do |config|
 
   # Install Ubuntu 20 LTS.
   config.vm.box = "ubuntu/focal64"
+
+  # Set up port forwarding.
+  # HTTP lando site.
+  config.vm.network "forwarded_port", guest: 20080, host: 20080, protocol: "tcp"
+  # HTTPS lando site.
+  config.vm.network "forwarded_port", guest: 20443, host: 20443, protocol: "tcp"
+  # Mailhog.
+  config.vm.network "forwarded_port", guest: 20081, host: 20081, protocol: "tcp"
 
   # Set up SSH
   config.vm.provision "shell" do |s|
